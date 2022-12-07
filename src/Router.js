@@ -1,12 +1,22 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 
 const PageOne = () => {
-  return <div>Pageone</div>
+  return (
+    <div>
+      Pageone
+      <Link to="/pagetwo">Page two</Link>
+    </div>
+  )
 }
 
 const PageTwo = () => {
-  return <div>Pagetwo</div>
+  return (
+    <div>
+      Pagetwo
+      <Link to="/">Page one</Link>
+    </div>
+  )
 }
 
 const Router = () => {
