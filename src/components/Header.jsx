@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <div class="ui secondary  menu">
-      <Link to="/" class="item">
+    <div className="ui secondary  menu">
+      <Link to="/" className="item">
         TWICK-TV
       </Link>
-      <Link to="/" class="item">
+      <Link to="/" className="item">
         Streams
       </Link>
-      <div class="right menu">
-        <div class="item">
-          <div class="ui icon input">
+      <div className="right menu">
+        <div className="item">
+          <div className="ui icon input">
             <input type="text" placeholder="Search..." />
-            <i class="search link icon"></i>
+            <i className="search link icon"></i>
           </div>
         </div>
-        <Link to="/logout" class="ui item">
+        <Link to="/logout" className="ui item">
           Logout
         </Link>
       </div>
