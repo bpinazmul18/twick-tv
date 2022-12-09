@@ -13,7 +13,7 @@ export const signOut = () => ({
 
 // Initial state
 const initalState = {
-  isSignIn: null,
+  isSignedIn: null,
   loading: false,
   userInfo: null,
   userToken: null,
@@ -24,11 +24,11 @@ const initalState = {
 // Reducer
 const authReducer = (auth = initalState, action) => {
   if (action.type === SIGN_IN) {
-    return { ...auth, isSignIn: true }
+    return { ...auth, isSignedIn: true }
   }
 
   if (action.type === SIGN_OUT) {
-    return { ...auth, isSignIn: false }
+    return { ...auth, isSignedIn: false }
   }
   return auth
 }
