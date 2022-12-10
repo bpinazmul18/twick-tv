@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import {
   addStream,
   getAllStreams,
@@ -59,6 +61,7 @@ export const delteStream = (id) => async (dispatch) => {
     await removeStream(id)
     dispatch({
       type: DELETE_STREAM,
+      payload: id,
     })
   } catch (ex) {}
 }
@@ -67,14 +70,30 @@ export const delteStream = (id) => async (dispatch) => {
 const initalState = {
   loading: false,
   list: [],
-  stream: null,
   lastFetch: null,
 }
 
 // Reducer
 const streamsReducer = (streams = initalState, action) => {
+  if (action.type === FETCH_STREAMS) {
+    return { ...streams, list: [..._.mapKeys(action.payload), 'id'] }
+  }
+
   if (action.type === STREAM_ADDED) {
     return { ...streams, list: [...streams.list, action.payload.stream] }
+  }
+
+  if (action.type === FETCH_STREAM) {
+    return { ...streams, [action.payload.id]: action.payload.stream }
+  }
+
+  if (action.type === UPDATE_STREAM) {
+    return { ...streams, [action.payload.id]: action.payload.stream }
+  }
+
+  if (action.type === DELETE_STREAM) {
+    const removeStream = _.omit(streams[action.payload], action.payload)
+    return { ...streams, removeStream }
   }
   return streams
 }
