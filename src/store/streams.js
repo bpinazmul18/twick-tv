@@ -2,7 +2,7 @@
 import { addStream } from '../services/streams'
 
 // Actions
-const createStream = (data) => async (dispatch) => {
+export const createStream = (data) => async (dispatch) => {
   const response = await addStream(data)
   console.log(response)
 }
