@@ -4,8 +4,8 @@ class StreamCreate extends React.Component {
   renderedError({ error, touched }) {
     if (touched && error) {
       return (
-        <div className="ui error message">
-          <div className="header">{error}</div>
+        <div className="ui error">
+          <div style={{ color: '#9f3a38' }}>{error}</div>
         </div>
       )
     }
