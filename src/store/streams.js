@@ -31,7 +31,7 @@ export const fetchStreams = () => async (dispatch) => {
     const response = await getAllStreams()
     dispatch({
       type: FETCH_STREAMS,
-      payload: { stream: response.data },
+      payload: response.data,
     })
   } catch (ex) {}
 }
@@ -76,7 +76,7 @@ const initalState = {
 // Reducer
 const streamsReducer = (streams = initalState, action) => {
   if (action.type === FETCH_STREAMS) {
-    return { ...streams, list: [..._.mapKeys(action.payload), 'id'] }
+    return { ...streams, list: { ..._.mapKeys(action.payload, 'id') } }
   }
 
   if (action.type === STREAM_ADDED) {

@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 
-const StreamList = () => {
+import { fetchStreams } from '../store/streams'
+
+const StreamList = (props) => {
+  useEffect(() => {
+    props.fetchStreams()
+  }, [])
   return <div>StreamList</div>
 }
 
-export default StreamList
+export default connect(null, { fetchStreams })(StreamList)
