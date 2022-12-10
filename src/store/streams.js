@@ -1,6 +1,11 @@
 // ActionTypes
+import { addStream } from '../services/streams'
 
 // Actions
+const createStream = (data) => async (dispatch) => {
+  const response = await addStream(data)
+  console.log(response)
+}
 
 // Initial state
 const initalState = {
