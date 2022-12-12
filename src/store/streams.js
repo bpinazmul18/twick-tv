@@ -16,9 +16,11 @@ const UPDATE_STREAM = 'UPDATE_STREAM'
 const DELETE_STREAM = 'DELETE_STREAM'
 
 // Actions
-export const createStream = (data) => async (dispatch) => {
+export const createStream = (data) => async (dispatch, getState) => {
+  const { userId } = getState().auth
+
   try {
-    const response = await addStream(data)
+    const response = await addStream({ ...data, userId })
     dispatch({
       type: STREAM_ADDED,
       payload: { stream: response.data },
