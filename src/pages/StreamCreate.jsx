@@ -2,8 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createStream } from '../store/streams'
-class StreamCreate extends React.Component {
-  renderedError({ error, touched }) {
+
+const StreamCreate = (props) => {
+  const renderedError = ({ error, touched }) => {
     if (touched && error) {
       return (
         <div className="ui error">
@@ -12,45 +13,41 @@ class StreamCreate extends React.Component {
       )
     }
   }
-  renderedInput = ({ input, label, id, meta }) => {
+
+  const renderedInput = ({ input, label, id, meta }) => {
     return (
       <div className={`field ${meta.touched && meta.error && 'error'}`}>
         <label htmlFor={id}>{label}</label>
         <input id={id} {...input} />
-        {this.renderedError(meta)}
+        {renderedError(meta)}
       </div>
     )
   }
 
-  onSubmit = (formValues) => {
-    this.props.createStream(formValues)
+  const onSubmit = (formValues) => {
+    props.createStream(formValues)
   }
 
-  render() {
-    return (
-      <form
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-        className="ui form error"
-      >
-        <Field
-          name="title"
-          component={this.renderedInput}
-          type="text"
-          label="Enter Title"
-          id="title"
-        />
-        <Field
-          name="description"
-          component={this.renderedInput}
-          type="text"
-          label="Enter Description"
-          id="description"
-        />
+  return (
+    <form onSubmit={props.handleSubmit(onSubmit)} className="ui form error">
+      <Field
+        name="title"
+        component={renderedInput}
+        type="text"
+        label="Enter Title"
+        id="title"
+      />
+      <Field
+        name="description"
+        component={renderedInput}
+        type="text"
+        label="Enter Description"
+        id="description"
+      />
 
-        <button className="ui button primary">Submit</button>
-      </form>
-    )
-  }
+      <button className="ui button primary">Submit</button>
+    </form>
+  )
 }
 
 const validate = (formValues) => {
