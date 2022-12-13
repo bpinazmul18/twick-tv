@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { fetchStreams } from '../store/streams'
 
 const StreamList = (props) => {
-  console.log(props)
   useEffect(() => {
     props.fetchStreams()
   }, [])

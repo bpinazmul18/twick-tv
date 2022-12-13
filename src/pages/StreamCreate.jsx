@@ -1,9 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createStream } from '../store/streams'
 
 const StreamCreate = (props) => {
+  const navigate = useNavigate()
+
   const renderedError = ({ error, touched }) => {
     if (touched && error) {
       return (
@@ -25,7 +28,7 @@ const StreamCreate = (props) => {
   }
 
   const onSubmit = (formValues) => {
-    props.createStream(formValues)
+    props.createStream(formValues, navigate)
   }
 
   return (
