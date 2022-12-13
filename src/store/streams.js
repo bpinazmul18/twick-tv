@@ -25,6 +25,9 @@ export const createStream = (data) => async (dispatch, getState) => {
       type: STREAM_ADDED,
       payload: { stream: response.data },
     })
+
+    // Do some programmatic navigation to
+    // get the user back to the root route
   } catch (ex) {}
 }
 
