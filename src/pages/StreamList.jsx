@@ -13,7 +13,9 @@ const StreamList = (props) => {
       return (
         <div className="right floated content">
           <button className="ui red button">Delete</button>
-          <button className="ui primary button">Edit</button>
+          <Link to={`/streams/edit/${stream.id}`} className="ui primary button">
+            Edit
+          </Link>
         </div>
       )
     }
