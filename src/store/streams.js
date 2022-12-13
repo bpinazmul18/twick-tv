@@ -16,7 +16,7 @@ const UPDATE_STREAM = 'UPDATE_STREAM'
 const DELETE_STREAM = 'DELETE_STREAM'
 
 // Actions
-export const createStream = (data) => async (dispatch, getState) => {
+export const createStream = (data, navigate) => async (dispatch, getState) => {
   const { userId } = getState().auth
 
   try {
@@ -26,8 +26,7 @@ export const createStream = (data) => async (dispatch, getState) => {
       payload: { stream: response.data },
     })
 
-    // Do some programmatic navigation to
-    // get the user back to the root route
+    await navigate('/')
   } catch (ex) {}
 }
 
