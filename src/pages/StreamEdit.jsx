@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-const StreamEdit = () => {
+import { fetchStream } from '../store/streams'
+const StreamEdit = (props) => {
   const { streamId } = useParams()
 
-  return <div>StreamEdit</div>
+  useEffect(() => {
+    props.fetchStream(streamId)
+  }, [])
+
+  console.log(props)
+  if (!props.stream) return <div>Loading...</div>
+  return <div>{props.stream.title}</div>
 }
 
-export default StreamEdit
+const mapStateToProps = (state) => {
+  return { stream: state.entities.streams.stream }
+}
+
+export default connect(mapStateToProps, { fetchStream })(StreamEdit)
