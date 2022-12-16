@@ -6,26 +6,18 @@ import { useParams } from 'react-router-dom'
 
 const StreamShow = (props) => {
   const videoRef = createRef()
+  let flvPlayer = createRef()
   const { streamId } = useParams()
 
   useEffect(() => {
     props.fetchStream(streamId)
     buildVidoePlayer()
+
+    return () => flvPlayer.destroy()
   }, [streamId])
 
   const buildVidoePlayer = () => {
-    // const player = flb.createPlayer({
-    //   type: 'flb',
-    //   url: `http://localhost:8000/live/${streamId}.flv`,
-    // })
-
-    // if (!player || !props.stream) return null
-
-    // player.attachMediaElement(videoRef.current)
-    // player.load()
-    // player.play()
-
-    const flvPlayer = flv.createPlayer({
+    flvPlayer = flv.createPlayer({
       type: 'flv',
       url: `http://localhost:8000/live/${streamId}.flv`,
     })
