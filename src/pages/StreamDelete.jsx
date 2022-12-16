@@ -17,21 +17,27 @@ const StreamDelete = (props) => {
     </React.Fragment>
   )
 
+  const renderedContent = () => {
+    if (!props.stream) return 'Are you sure you want to delete this stream?'
+    return `Are you sure you want to delete the stream with title: ${props.stream.title}`
+  }
+
   useEffect(() => {
     props.fetchStream(streamId)
   }, [])
 
   return (
-    <div>
-      Stream Delete
-      <Modal
-        title="Delete a Stream"
-        content="You are sure you want to delete this stream?"
-        actions={actions}
-        onDismiss={() => navigate('/')}
-      />
-    </div>
+    <Modal
+      title="Delete a Stream"
+      content={renderedContent()}
+      actions={actions}
+      onDismiss={() => navigate('/')}
+    />
   )
 }
 
-export default connect(null, { fetchStream })(StreamDelete)
+const mapStateToProps = (state) => {
+  return { stream: state.entities.streams.stream }
+}
+
+export default connect(mapStateToProps, { fetchStream })(StreamDelete)
