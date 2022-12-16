@@ -14,16 +14,11 @@ const Modal = (props) => {
         onClick={(e) => e.stopPropagation()}
         className="ui standard modal visible active"
       >
-        <div className="header">Delete a Stream</div>
+        <div className="header">{props.title}</div>
         <div className="content">
-          <p>Are you sure?</p>
+          <p>{props.content}</p>
         </div>
-        <div className="actions">
-          <div className="ui button primary">Delete</div>
-          <Link to={'/'} className="ui cancel button">
-            Cancel
-          </Link>
-        </div>
+        <div className="actions">{props.actions}</div>
       </div>
     </div>,
     document.querySelector('#modal')
