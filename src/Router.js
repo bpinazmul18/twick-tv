@@ -17,7 +17,7 @@ const Router = () => {
         exact
         element={<StreamDelete />}
       />
-      <Route path="/streams/show" exact element={<StreamShow />} />
+      <Route path="/streams/:streamId" exact element={<StreamShow />} />
     </Routes>
   )
 }
