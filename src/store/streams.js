@@ -23,8 +23,10 @@ export const createStream = (data, navigate) => async (dispatch, getState) => {
     const response = await addStream({ ...data, userId })
     dispatch({
       type: STREAM_ADDED,
-      payload: { stream: response.data },
+      payload: response.data,
     })
+
+    console.log(response)
 
     await navigate('/')
   } catch (ex) {}
@@ -85,7 +87,7 @@ const streamsReducer = (streams = initalState, action) => {
   }
 
   if (action.type === STREAM_ADDED) {
-    return { ...streams, list: [...streams.list, action.payload.stream] }
+    return { ...streams, list: { [action.payload.id]: action.payload } }
   }
 
   if (action.type === FETCH_STREAM) {
@@ -93,7 +95,7 @@ const streamsReducer = (streams = initalState, action) => {
   }
 
   if (action.type === UPDATE_STREAM) {
-    return { ...streams, [action.payload.id]: action.payload.stream }
+    return { ...streams, list: { [action.payload.id]: action.payload } }
   }
 
   if (action.type === DELETE_STREAM) {
