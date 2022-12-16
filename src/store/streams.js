@@ -26,8 +26,6 @@ export const createStream = (data, navigate) => async (dispatch, getState) => {
       payload: response.data,
     })
 
-    console.log(response)
-
     await navigate('/')
   } catch (ex) {}
 }
@@ -52,13 +50,15 @@ export const fetchStream = (id) => async (dispatch) => {
   } catch (ex) {}
 }
 
-export const editStream = (id, formValues) => async (dispatch) => {
+export const editStream = (id, formValues, navigate) => async (dispatch) => {
   try {
     const response = await updateStream(id, formValues)
     dispatch({
       type: UPDATE_STREAM,
-      payload: { stream: response.data },
+      payload: response.data,
     })
+
+    await navigate('/')
   } catch (ex) {}
 }
 

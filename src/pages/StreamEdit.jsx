@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
+import _ from 'lodash'
 import StreamForm from '../components/StreamForm'
 import { editStream, fetchStream } from '../store/streams'
 
@@ -17,8 +18,7 @@ const StreamEdit = (props) => {
   }, [])
 
   const onSubmit = (formValues) => {
-    console.log(formValues)
-    // props.createStream(formValues, navigate)
+    props.editStream(streamId, formValues, navigate)
   }
 
   if (!props.stream) return <div>Loading...</div>
@@ -27,10 +27,7 @@ const StreamEdit = (props) => {
       <h3>Edit a Stream</h3>
 
       <StreamForm
-        initialValues={{
-          title: props.stream.title,
-          description: props.stream.description,
-        }}
+        initialValues={_.pick(props.stream, 'title', 'description')}
         onSubmit={onSubmit}
       />
     </div>
