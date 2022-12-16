@@ -62,13 +62,15 @@ export const editStream = (id, formValues, navigate) => async (dispatch) => {
   } catch (ex) {}
 }
 
-export const delteStream = (id) => async (dispatch) => {
+export const delteStream = (id, navigate) => async (dispatch) => {
   try {
     await removeStream(id)
     dispatch({
       type: DELETE_STREAM,
       payload: id,
     })
+
+    await navigate('/')
   } catch (ex) {}
 }
 
