@@ -1,29 +1,40 @@
 import React, { useEffect, createRef } from 'react'
 import { connect } from 'react-redux'
-import flb from 'flv.js'
+import flv from 'flv.js'
 import { fetchStream } from '../store/streams'
 import { useParams } from 'react-router-dom'
 
 const StreamShow = (props) => {
   const videoRef = createRef()
   const { streamId } = useParams()
-  console.log(videoRef)
+
   useEffect(() => {
     props.fetchStream(streamId)
     buildVidoePlayer()
   }, [streamId])
 
   const buildVidoePlayer = () => {
-    const player = flb.createPlayer({
-      type: 'flb',
+    // const player = flb.createPlayer({
+    //   type: 'flb',
+    //   url: `http://localhost:8000/live/${streamId}.flv`,
+    // })
+
+    // if (!player || !props.stream) return null
+
+    // player.attachMediaElement(videoRef.current)
+    // player.load()
+    // player.play()
+
+    const flvPlayer = flv.createPlayer({
+      type: 'flv',
       url: `http://localhost:8000/live/${streamId}.flv`,
     })
 
-    if (!player || !props.stream) return null
+    if (!flvPlayer || !props.stream) return null
 
-    player.attachMediaElement(videoRef.current)
-    player.load()
-    player.play()
+    flvPlayer.attachMediaElement(videoRef.current)
+    flvPlayer.load()
+    flvPlayer.play()
   }
 
   if (!props.stream) return <div>Loading...</div>
