@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Modal from '../components/Modal'
 
 const StreamDelete = () => {
+  const navigate = useNavigate()
   const actions = (
     <React.Fragment>
       <div className="ui button red">Delete</div>
@@ -19,6 +20,7 @@ const StreamDelete = () => {
         title="Delete a Stream"
         content="You are sure you want to delete this stream?"
         actions={actions}
+        onDismiss={() => navigate('/')}
       />
     </div>
   )
