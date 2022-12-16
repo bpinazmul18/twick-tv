@@ -1,9 +1,13 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Modal from '../components/Modal'
+import { connect } from 'react-redux'
+import { fetchStream } from '../store/streams'
 
-const StreamDelete = () => {
+const StreamDelete = (props) => {
   const navigate = useNavigate()
+  const { streamId } = useParams()
+
   const actions = (
     <React.Fragment>
       <div className="ui button red">Delete</div>
@@ -12,6 +16,10 @@ const StreamDelete = () => {
       </Link>
     </React.Fragment>
   )
+
+  useEffect(() => {
+    props.fetchStream(streamId)
+  }, [])
 
   return (
     <div>
@@ -26,4 +34,4 @@ const StreamDelete = () => {
   )
 }
 
-export default StreamDelete
+export default connect(null, { fetchStream })(StreamDelete)

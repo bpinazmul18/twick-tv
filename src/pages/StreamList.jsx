@@ -12,7 +12,7 @@ const StreamList = (props) => {
     if (stream.userId) {
       return (
         <div className="right floated content">
-          <Link to={`/streams/delete`} className="ui red button">
+          <Link to={`/streams/delete/${stream.id}`} className="ui red button">
             Delete
           </Link>
           <Link to={`/streams/edit/${stream.id}`} className="ui primary button">
